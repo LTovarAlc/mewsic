@@ -1,0 +1,37 @@
+.topArtists{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0px;
+}
+
+.topArtists h2{
+    width: 90%;
+    text-align: left;
+    font-size: 32px;
+    font-family: 'Intern', sans-serif;
+    font-weight: bolder;
+    margin-top: 20px;
+}
+
+.topArtists__container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 0px;
+    margin-top: 10px;
+    width: 90%;
+}
+
+@media (max-width: 768px) {
+    .topArtists__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .topArtists__container {
+        grid-template-columns: 1fr;
+    }
+}
