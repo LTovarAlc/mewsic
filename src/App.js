@@ -1,13 +1,16 @@
-import React from "react";
-import "./App.css"
+// App.js
+import React, { useState } from "react";
+import "./App.css";
 import Dashboard from "./pages/dashboard/dashboard";
 import Header from "./components/header/header";
 
 function App() {
+  const [isSearching, setIsSearching] = useState(false);
+
   return (
     <section className="mewsic">
-      <Header/>
-      <Dashboard/>
+      <Header onSearchChange={setIsSearching} />
+      <Dashboard isSearching={isSearching} />  {/* Pasa isSearching como prop */}
     </section>
   );
 }

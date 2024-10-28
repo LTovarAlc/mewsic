@@ -1,16 +1,17 @@
-import "./header.css"
+// Header.js
+import "./header.css";
 import React from "react";
 import meowsic from "../../assets/imgs/mewsic.png";
 import Searcher from "../../components/shared/searcher/searcher";
 
-const Header = () => {
+const Header = ({ onSearchChange }) => {
   return (
     <header className="header">
       <div className="logo__container">
         <img src={meowsic} alt="meowsicLogo" className="meowsicLogo" />
       </div>
       <div className="searcher__container">
-        <Searcher />
+        <Searcher onSearchChange={onSearchChange} />
       </div>
     </header>
   );

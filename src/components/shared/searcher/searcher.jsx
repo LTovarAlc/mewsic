@@ -1,12 +1,12 @@
+// Searcher.js
 import React, { useState, useEffect } from "react";
 import { getSpotifyToken, searchSpotify } from "../../../services/spotifyService";
 import "./searcher.css";
 
-const Searcher = () => {
-  const [searchQuery, setSearchQuery] = useState("");  // Estado para el input de búsqueda
-  const [token, setToken] = useState("");  // Estado para almacenar el token de Spotify
+const Searcher = ({ onSearchChange }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [token, setToken] = useState("");
 
-  // Obtener el token de Spotify al cargar el componente
   useEffect(() => {
     const fetchToken = async () => {
       const token = await getSpotifyToken();
@@ -15,26 +15,19 @@ const Searcher = () => {
     fetchToken();
   }, []);
 
-  // Ejecutar la búsqueda cada vez que el usuario cambia el input
   useEffect(() => {
-    if (searchQuery.length > 0) {
+    if (token && searchQuery.length > 0) {
       performSearch(searchQuery);
+      onSearchChange(true); // Cambia a búsqueda activa cuando hay texto y token está listo
+    } else if (searchQuery.length === 0) {
+      onSearchChange(false); // Cambia a búsqueda inactiva cuando el campo está vacío
     }
-  }, [searchQuery]);
+  }, [searchQuery, token]); // Depende de searchQuery y token
 
-  // Función para realizar la búsqueda en Spotify
   const performSearch = async (query) => {
     if (token) {
       const data = await searchSpotify(query, token);
-
-      // Resultado principal: el primer artista que coincide con la búsqueda
-      const mainResult = data.artists.items[0];
-
-      // Resultados relacionados: las primeras 15 canciones relacionadas con el artista o su participación
-      const relatedResults = data.tracks.items;
-
-      console.log("Resultado principal:", mainResult);
-      console.log("Resultados relacionados:", relatedResults);
+      console.log("Resultado de búsqueda:", data);
     }
   };
 
@@ -46,7 +39,7 @@ const Searcher = () => {
         name="text"
         className="input"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}  // Actualizar el estado al cambiar el input
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
     </div>
   );
