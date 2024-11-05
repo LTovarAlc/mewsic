@@ -52,53 +52,62 @@ export const getTrendingTracks = async (token) => {
 // Función para buscar en Spotify (artistas, canciones, álbumes)
 export const searchSpotify = async (query, token) => {
   try {
-    const encodedQuery = encodeURIComponent(query);
-    const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${encodedQuery}&type=track,artist,album&limit=10`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const encodedQuery = encodeURIComponent(query);
+      const artistResponse = await fetch(
+          `https://api.spotify.com/v1/search?q=${encodedQuery}&type=artist&limit=1`,
+          {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+              },
+          }
+      );
+      const artistData = await artistResponse.json();
+      
+      let bestResult = null;
+      let similarSongs = [];
+      let similarArtists = [];
+
+      // Verificar si se encontró un artista que coincida
+      if (artistData.artists && artistData.artists.items.length > 0) {
+          bestResult = artistData.artists.items[0];
+          
+          // Obtener canciones del mejor resultado (artista)
+          const tracksResponse = await fetch(
+              `https://api.spotify.com/v1/artists/${bestResult.id}/top-tracks?market=US`,
+              {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              }
+          );
+          const tracksData = await tracksResponse.json();
+
+          if (tracksData.tracks) {
+              similarSongs = tracksData.tracks.slice(0, 10); // Tomar las primeras 10 canciones
+          }
+
+          // Obtener artistas relacionados
+          const relatedArtistsResponse = await fetch(
+              `https://api.spotify.com/v1/artists/${bestResult.id}/related-artists`,
+              {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              }
+          );
+          const relatedArtistsData = await relatedArtistsResponse.json();
+
+          if (relatedArtistsData.artists) {
+              similarArtists = relatedArtistsData.artists.slice(0, 5); // Tomar los primeros 5 artistas relacionados
+          }
       }
-    );
 
-    const data = await response.json();
-    console.log("Respuesta de búsqueda de Spotify:", data);
-
-    if (data.tracks || data.artists || data.albums) {
-      const bestResult = {};
-      const similarResults = {
-        tracks: data.tracks ? data.tracks.items.slice(1) : [],
-        albums: data.albums ? data.albums.items.slice(1) : [],
-        artists: data.artists ? data.artists.items.slice(1) : [],
-      };
-
-      // Asigna el "Mejor resultado" en orden de prioridad: artista, canción, álbum
-      if (data.artists && data.artists.items.length > 0) {
-        bestResult.type = "artist";
-        bestResult.data = data.artists.items[0];
-      } else if (data.tracks && data.tracks.items.length > 0) {
-        bestResult.type = "track";
-        bestResult.data = data.tracks.items[0];
-      } else if (data.albums && data.albums.items.length > 0) {
-        bestResult.type = "album";
-        bestResult.data = data.albums.items[0];
-      }
-
-      return {
-        bestResult,
-        similarResults,
-      };
-    } else {
-      console.error("No se encontraron resultados de búsqueda:", data);
-      return null;
-    }
+      return { bestResult, similarSongs, similarArtists };
   } catch (error) {
-    console.error("Error al buscar en Spotify:", error);
-    return null;
+      console.error("Error al buscar en Spotify:", error);
+      return null;
   }
 };
-
 // Obtener los artistas más populares
 export const getTopArtists = async (token) => {
   try {
