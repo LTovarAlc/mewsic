@@ -1,0 +1,37 @@
+.searchFeed{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.searchFeed::-webkit-scrollbar{
+    display: none;
+}
+
+.searchFeed-Head{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px 0px;
+}
+
+.BestResult{
+    width: 48%;
+    height: 98%;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BestResult:hover{
+    background-color: #2a2a2a;
+}
+
+.SimilarResults{
+    width: 48%;
+    background-color: red;
+}
