@@ -1,5 +1,6 @@
 import React from "react";
 import "./queryCard.css"
+import QueryCardPlayButton from "../queryCardPlayButton/queryCardPlayButtton";
 
 const QueryCardSong = () => {
     return(
@@ -8,6 +9,7 @@ const QueryCardSong = () => {
             <div className="img"></div>
             <p className="QueryCard-SongName">Song Title</p>
             <span className="QueryCard-SongName-artist">Artist</span>
+            <QueryCardPlayButton/>
         </div>
     )
 }
