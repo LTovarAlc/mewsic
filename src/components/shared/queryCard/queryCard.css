@@ -14,7 +14,6 @@
 }
 
 .QueryCard-SongName{
-    width: 100%;
     font-size: 26px;
     font-family: 'intern', sans-serif;
     font-weight: 600;
@@ -22,19 +21,19 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    cursor: pointer;
 }
 
 .QueryCard-SongName-artist{
-    width: 100%;
     font-size: 18px;
     font-family: 'intern', sans-serif;
     font-weight: lighter;
     text-align: left;
     font-style: italic;
+    cursor: pointer;
+    background-color: red;
+    width: 0;
 }
 
-.QueryCard-SongName-artist{
-    cursor: pointer;
+.QueryCard-SongName-artist:hover{
     text-decoration: underline;
 }
