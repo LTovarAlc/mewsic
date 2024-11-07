@@ -1,4 +1,3 @@
-// Searcher.js
 import React, { useState, useEffect } from "react";
 import { getSpotifyToken, searchSpotify } from "../../../services/spotifyService";
 import "./searcher.css";

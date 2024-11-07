@@ -1,4 +1,3 @@
-// dashboard.js
 import React, { useState } from "react";
 import "./dashboard.css";
 import Player from "../../components/player/player";
