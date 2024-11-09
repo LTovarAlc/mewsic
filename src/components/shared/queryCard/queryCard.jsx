@@ -1,17 +1,18 @@
 import React from "react";
-import "./queryCard.css"
+import "./queryCard.css";
 import QueryCardPlayButton from "../queryCardPlayButton/queryCardPlayButtton";
 
-const QueryCardSong = () => {
-    return(
-        <div className="QueryCardSong">
-            {/* <img src="" alt="SongIMG" className="QueryCard-SongIMG" /> */}
-            <div className="img"></div>
-            <p className="QueryCard-SongName">Song Title</p>
-            <span className="QueryCard-SongName-artist">Artist</span>
-            <QueryCardPlayButton/>
-        </div>
-    )
-}
+const QueryCardSong = ({ songName, artistName, imageUrl, onClick }) => {
+  console.log("Props en QueryCardSong: ", { songName, artistName, imageUrl }); // Añadir log para depuración
 
-export default QueryCardSong
+  return (
+    <div className="QueryCardSong" onClick={onClick}>
+      {imageUrl && <img src={imageUrl} alt="SongIMG" className="QueryCard-SongIMG" />}
+      {songName && <p className="QueryCard-SongName">{songName}</p>}
+      {artistName && <span className="QueryCard-SongName-artist">{artistName}</span>}
+      <QueryCardPlayButton />
+    </div>
+  );
+};
+
+export default QueryCardSong;

@@ -17,16 +17,22 @@ const Searcher = ({ onSearchChange }) => {
   useEffect(() => {
     if (token && searchQuery.length > 0) {
       performSearch(searchQuery);
-      onSearchChange(true); // Cambia a búsqueda activa cuando hay texto y token está listo
+      onSearchChange(true, searchQuery); // Cambia a búsqueda activa cuando hay texto y token está listo
     } else if (searchQuery.length === 0) {
-      onSearchChange(false); // Cambia a búsqueda inactiva cuando el campo está vacío
+      onSearchChange(false, searchQuery); // Cambia a búsqueda inactiva cuando el campo está vacío
     }
   }, [searchQuery, token]); // Depende de searchQuery y token
 
   const performSearch = async (query) => {
     if (token) {
       const data = await searchSpotify(query, token);
-      console.log("Resultado de búsqueda:", data);
+      console.log("Resultados de búsqueda: ", data);
+
+      onSearchChange(true, {
+        bestResult: data.bestResult,
+        similarSongs: data.similarSongs,
+        similarArtists: data.similarArtists,
+      });
     }
   };
 

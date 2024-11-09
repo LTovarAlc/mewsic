@@ -4,12 +4,14 @@ import Player from "../../components/player/player";
 import Feed from "../../components/feed/feed";
 import SearchFeed from "../../components/searchFeed/searchFeed";
 
-const Dashboard = ({ isSearching }) => {  // Recibe la prop isSearching directamente desde App
+const Dashboard = ({ isSearching, searchResults }) => {
   const [selectedSong, setSelectedSong] = useState({
     songName: "SONG TITLE",
     artistName: "Artist",
     imageUrl: null,
   });
+
+  console.log("Resultados de búsqueda en Dashboard: ", searchResults); // Añadir log para depuración
 
   return (
     <div className="dashboard">
@@ -17,9 +19,8 @@ const Dashboard = ({ isSearching }) => {  // Recibe la prop isSearching directam
         <Player song={selectedSong} />
       </div>
       <div className="feed__container">
-        {/* Renderiza SearchFeed o Feed basado en isSearching */}
         {isSearching ? (
-          <SearchFeed setSelectedSong={setSelectedSong} />
+          <SearchFeed setSelectedSong={setSelectedSong} searchResults={searchResults} />
         ) : (
           <Feed setSelectedSong={setSelectedSong} />
         )}

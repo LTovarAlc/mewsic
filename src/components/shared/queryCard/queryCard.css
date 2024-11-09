@@ -6,10 +6,9 @@
     justify-content: space-evenly;
 }
 
-.img{
+.QueryCard-SongIMG{
     height: 130px;
     width: 130px;
-    background-color: grey;
     border-radius: 12px;
 }
 
@@ -30,8 +29,8 @@
     text-align: left;
     font-style: italic;
     cursor: pointer;
-    background-color: red;
     width: 0;
+    width: 100%;
 }
 
 .QueryCard-SongName-artist:hover{

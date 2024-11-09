@@ -4,12 +4,17 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Header from "./components/header/header";
 
 function App() {
-  const [isSearching, setIsSearching] = useState(false);
+  const [searchData, setSearchData] = useState({ isSearching: false, results: null });
+
+  const handleSearchChange = (isSearching, results = null) => {
+    console.log("Resultados de búsqueda en App: ", results); // Añadir log para depuración
+    setSearchData({ isSearching, results });
+  };
 
   return (
     <section className="mewsic">
-      <Header onSearchChange={setIsSearching} />
-      <Dashboard isSearching={isSearching} />  {/* Pasa isSearching como prop */}
+      <Header onSearchChange={handleSearchChange} />
+      <Dashboard isSearching={searchData.isSearching} searchResults={searchData.results} />
     </section>
   );
 }
