@@ -16,6 +16,7 @@
 
 .meowsicLogo{
     height: 50px;
+    cursor: pointer;
 }
 
 .searcher__container{
@@ -24,5 +25,4 @@
     display: flex;
     align-items: left;
     justify-content: center;
-
 }

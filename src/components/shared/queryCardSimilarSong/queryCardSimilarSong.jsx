@@ -2,8 +2,6 @@ import React from "react";
 import "./queryCardSimilarSong.css";
 
 const QueryCardSimilarSong = ({ songName, artistName, imageUrl, onClick }) => {
-  console.log("Props en QueryCardSimilarSong: ", { songName, artistName, imageUrl }); // Añadir log para depuración
-
   return (
     <div className="similarsCards" onClick={onClick}>
       {imageUrl && <img src={imageUrl} alt="SongIMG" className="similarSongImg" />}

@@ -30,6 +30,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 70%;
 }
 
 .QueryCard-SongName-artist{
