@@ -26,7 +26,6 @@ const Searcher = ({ onSearchChange }) => {
   const performSearch = async (query) => {
     if (token) {
       const data = await searchSpotify(query, token);
-      console.log("Resultados de búsqueda: ", data);
 
       onSearchChange(true, {
         bestResult: data.bestResult,

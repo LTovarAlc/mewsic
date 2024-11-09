@@ -3,7 +3,6 @@ import "./queryCard.css";
 import QueryCardPlayButton from "../queryCardPlayButton/queryCardPlayButtton";
 
 const QueryCardSong = ({ songName, artistName, imageUrl, onClick }) => {
-  console.log("Props en QueryCardSong: ", { songName, artistName, imageUrl }); // Añadir log para depuración
 
   return (
     <div className="QueryCardSong" onClick={onClick}>

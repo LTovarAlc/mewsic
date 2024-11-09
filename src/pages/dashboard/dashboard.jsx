@@ -11,8 +11,6 @@ const Dashboard = ({ isSearching, searchResults }) => {
     imageUrl: null,
   });
 
-  console.log("Resultados de búsqueda en Dashboard: ", searchResults); // Añadir log para depuración
-
   return (
     <div className="dashboard">
       <div className="player__container">

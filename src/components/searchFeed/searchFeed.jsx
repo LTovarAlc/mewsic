@@ -7,9 +7,6 @@ const SearchFeed = ({ searchResults, setSelectedSong }) => {
 
   // Verificar las propiedades de bestResult
   if (bestResult) {
-    console.log('Nombre de la canción: ', bestResult.name);
-    console.log('Artistas: ', bestResult.artists);
-    console.log('Imágenes: ', bestResult.album.images);
   }
 
   return (

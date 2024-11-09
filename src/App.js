@@ -7,7 +7,6 @@ function App() {
   const [searchData, setSearchData] = useState({ isSearching: false, results: null });
 
   const handleSearchChange = (isSearching, results = null) => {
-    console.log("Resultados de búsqueda en App: ", results); // Añadir log para depuración
     setSearchData({ isSearching, results });
   };
 
