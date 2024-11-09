@@ -13,6 +13,7 @@ const SearchFeed = ({ searchResults, setSelectedSong }) => {
     <section className="searchFeed">
       <div className="searchFeed-Head">
         <div className="BestResult">
+          <h2>Mejor Resultado</h2>
           {bestResult?.name && bestResult.artists && bestResult.artists.length > 0 && bestResult.album.images && bestResult.album.images.length > 0 && (
             <QueryCardSong
               songName={bestResult.name}
@@ -29,13 +30,7 @@ const SearchFeed = ({ searchResults, setSelectedSong }) => {
           )}
         </div>
         <div className="SimilarResults">
-          <div className="similarsCards">
-            <div className="similarSongImg"></div>
-            <div className="similarSong-details">
-              <p className="similarSongTitle">Song</p>
-              <span className="similarSongArtist">Artist</span>
-            </div>
-          </div>
+          <h2>Canciones</h2>
           <div className="similarsCards">
             <div className="similarSongImg"></div>
             <div className="similarSong-details">
