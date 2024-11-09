@@ -1,13 +1,10 @@
 import React from "react";
 import "./searchFeed.css";
 import QueryCardSong from "../shared/queryCard/queryCard";
+import QueryCardSimilarSong from "../shared/queryCardSimilarSong/queryCardSimilarSong";
 
 const SearchFeed = ({ searchResults, setSelectedSong }) => {
   const { bestResult, similarSongs } = searchResults || {};
-
-  // Verificar las propiedades de bestResult
-  if (bestResult) {
-  }
 
   return (
     <section className="searchFeed">
@@ -31,34 +28,23 @@ const SearchFeed = ({ searchResults, setSelectedSong }) => {
         </div>
         <div className="SimilarResults">
           <h2>Canciones</h2>
-          <div className="similarsCards">
-            <div className="similarSongImg"></div>
-            <div className="similarSong-details">
-              <p className="similarSongTitle">Song</p>
-              <span className="similarSongArtist">Artist</span>
-            </div>
-          </div>
-          <div className="similarsCards">
-            <div className="similarSongImg"></div>
-            <div className="similarSong-details">
-              <p className="similarSongTitle">Song</p>
-              <span className="similarSongArtist">Artist</span>
-            </div>
-          </div>
-          <div className="similarsCards">
-            <div className="similarSongImg"></div>
-            <div className="similarSong-details">
-              <p className="similarSongTitle">Song</p>
-              <span className="similarSongArtist">Artist</span>
-            </div>
-          </div>
-          <div className="similarsCards">
-            <div className="similarSongImg"></div>
-            <div className="similarSong-details">
-              <p className="similarSongTitle">Song</p>
-              <span className="similarSongArtist">Artist</span>
-            </div>
-          </div>
+          {similarSongs && similarSongs.slice(0, 4).map((song, index) => (
+            song.album && song.album.images && song.album.images.length > 0 && song.artists && song.artists.length > 0 && (
+              <QueryCardSimilarSong
+                key={index}
+                songName={song.name}
+                artistName={song.artists[0].name}
+                imageUrl={song.album.images[0].url}
+                onClick={() =>
+                  setSelectedSong({
+                    songName: song.name,
+                    artistName: song.artists[0].name,
+                    imageUrl: song.album.images[0].url,
+                  })
+                }
+              />
+            )
+          ))}
         </div> 
       </div>
     </section>
