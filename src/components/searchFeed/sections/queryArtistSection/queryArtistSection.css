@@ -22,7 +22,7 @@
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 0px;
     margin-top: 10px;
-    width: 90%;
+    width: 95%;
 }
 
 @media (max-width: 768px) {
