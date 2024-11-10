@@ -1,0 +1,38 @@
+.QueryArtistSection{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px 0px;
+}
+
+.QueryArtistSection h2{
+    width: 100%;
+    text-align: left;
+    font-size: 32px;
+    font-family: 'Intern', sans-serif;
+    font-weight: bolder;
+    padding-left: 30px;
+}
+
+.QueryArtistCards-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 0px;
+    margin-top: 10px;
+    width: 90%;
+}
+
+@media (max-width: 768px) {
+    .QueryArtistCards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .QueryArtistCards-container {
+        grid-template-columns: 1fr;
+    }
+}

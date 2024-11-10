@@ -59,66 +59,61 @@ export const getTrendingTracks = async (token) => {
 // Function to search Spotify for artists, songs, and albums
 export const searchSpotify = async (query, token) => {
   try {
-    const encodedQuery = encodeURIComponent(query); // Encode the query string to ensure it is URL-safe
+    const encodedQuery = encodeURIComponent(query);
 
-    // Request to search for tracks on Spotify
+    // Búsqueda del mejor resultado
     const trackResponse = await fetch(
       `https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=1`,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // Use the access token for authorization
+          Authorization: `Bearer ${token}`,
         },
       }
     );
     const trackData = await trackResponse.json();
 
-    let bestResult = null; // Variable to store the best matching track
-    let similarSongs = []; // Array to store similar songs
-    let similarArtists = []; // Array to store similar artists
+    let bestResult = null;
+    let similarSongs = [];
+    let similarArtists = [];
 
-    // Check if a track is found
     if (trackData.tracks && trackData.tracks.items.length > 0) {
-      bestResult = trackData.tracks.items[0]; // Get the first matching track
+      bestResult = trackData.tracks.items[0];
 
-      // Request to get tracks from the same artist as the found track
+      // Obtener canciones similares del mismo artista
       const artistTracksResponse = await fetch(
         `https://api.spotify.com/v1/artists/${bestResult.artists[0].id}/top-tracks?market=US`,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Use the access token for authorization
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       const artistTracksData = await artistTracksResponse.json();
 
-      // If tracks are found, return the first 4 tracks
       if (artistTracksData.tracks) {
         similarSongs = artistTracksData.tracks.slice(0, 4);
       }
 
-      // Request to get related artists to the found track's artist
+      // Obtener artistas relacionados
       const relatedArtistsResponse = await fetch(
         `https://api.spotify.com/v1/artists/${bestResult.artists[0].id}/related-artists`,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Use the access token for authorization
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       const relatedArtistsData = await relatedArtistsResponse.json();
 
-      // If related artists are found, return the first 5
       if (relatedArtistsData.artists) {
         similarArtists = relatedArtistsData.artists.slice(0, 5);
       }
     }
 
-    // Return the best result, similar songs, and related artists
     return { bestResult, similarSongs, similarArtists };
   } catch (error) {
-    // Log any error that occurs during the request
     console.error("Error searching on Spotify:", error);
-    return null; // Return null if there is an error
+    return null;
   }
 };
 
